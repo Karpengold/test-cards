@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Avatar, Card, CardContent, Select } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import { StatusSelect } from '../../StatusSelect';
 export const CardContainer = styled(Card)`
   width: 300px;

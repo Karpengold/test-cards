@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.div({
   display: 'flex',
-  // width: 'calc(100% - 20px)',
+  padding: '10px',
   height: '50px',
   justifyContent: 'space-between',
   alignItems: 'center',

@@ -1,8 +1,9 @@
 import { Status, User, userService } from '../services/user';
 import { userConstants } from '../constants/user';
+import { AppDispatch } from '../store';
 
 const getAll = () => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch(request());
 
     userService.getAll().then(
@@ -14,17 +15,16 @@ const getAll = () => {
   function request() {
     return { type: userConstants.GETALL_REQUEST };
   }
-  function success(users: any) {
+  function success(users: User[]) {
     return { type: userConstants.GETALL_SUCCESS, users };
   }
-  function failure(error: any) {
+  function failure(error: User[]) {
     return { type: userConstants.GETALL_FAILURE, error };
   }
 };
 
 const updateStatus = (id: number, status: string) => {
-  console.log('update status', id, status);
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch(request(id, status));
 
     userService.updateStatus(id, status).then(
@@ -49,7 +49,7 @@ const setFilter = (searchValue?: string, searchStatus?: Status) => {
 };
 
 const addUser = (name: string, status: Status) => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch(request(name, status));
 
     userService.addUser(name, status).then(

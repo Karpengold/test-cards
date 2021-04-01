@@ -9,7 +9,7 @@ export interface HeaderProps {
 export const Header = (props: HeaderProps) => {
   const { logo } = props;
   const theme = useTheme();
-  console.log(theme);
+
   return (
     <HeaderContainer>
       <LogoContainer color={theme.palette.primary.main}>{logo}</LogoContainer>

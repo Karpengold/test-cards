@@ -1,12 +1,10 @@
-import { Button, Input, Select, MenuItem } from '@material-ui/core';
 import { useCallback } from 'react';
 import { Status } from '../../services/user';
-import { AddUserModal } from '../Modals/AddUser';
 import { InterractBarContainer, InputContainer, SelectContainer } from './styles';
 
 export interface InterractBarProps {
-  handleSubmit: (event: any) => void;
-  handleChange: (event: any) => void;
+  handleSubmit: () => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   searchValue?: string;
   searchStatus?: Status;
 }
@@ -14,17 +12,17 @@ export interface InterractBarProps {
 const InterractBar = (props: InterractBarProps) => {
   const { searchStatus, searchValue, handleChange, handleSubmit } = props;
   const handleChangeCall = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       handleChange(event);
-      handleSubmit(event);
+      handleSubmit();
     },
     [handleSubmit, handleChange],
   );
   return (
     <InterractBarContainer>
-      <InputContainer name={'searchValue'} value={searchValue} onChange={handleChangeCall} />
+      <InputContainer name="searchValue" value={searchValue} onChange={handleChangeCall} />
 
-      <SelectContainer name={'searchStatus'} value={searchStatus} onChange={handleChangeCall} />
+      <SelectContainer name="searchStatus" value={searchStatus} onChange={handleChangeCall} />
     </InterractBarContainer>
   );
 };

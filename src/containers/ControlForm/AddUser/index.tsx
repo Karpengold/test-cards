@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useCallback, useState } from 'react';
 import { AddUserModal } from '../../../components/Modals/AddUser';
 import { Status } from '../../../services/user';
-import { ButtonContainer } from './styles';
+import { ButtonContainer, AddUserContainer } from './styles';
 
 export interface AddFormValues {
   name: string;
@@ -22,14 +22,15 @@ export const AddUser = (props: AddUserProps) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
+      handleClickClose();
       addUser(formik.values.name, formik.values.status);
     },
   });
-  const handleClickClose = useCallback(() => setOpen(false), [open]);
-  const handleClickOpen = useCallback(() => setOpen(true), [open]);
+  const handleClickClose = useCallback(() => setOpen(false), [setOpen]);
+  const handleClickOpen = useCallback(() => setOpen(true), [setOpen]);
 
   return (
-    <>
+    <AddUserContainer>
       <ButtonContainer variant="contained" color="primary" onClick={handleClickOpen}>
         Create +
       </ButtonContainer>
@@ -43,6 +44,6 @@ export const AddUser = (props: AddUserProps) => {
           handleClickClose={handleClickClose}
         />
       )}
-    </>
+    </AddUserContainer>
   );
 };

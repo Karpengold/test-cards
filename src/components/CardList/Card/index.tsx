@@ -1,7 +1,7 @@
-import { MenuItem, Typography, Avatar } from '@material-ui/core';
+import { Typography, Avatar } from '@material-ui/core';
 import React, { useCallback } from 'react';
-import { Status, Statuses } from '../../../services/user';
-import { StatusSelect } from '../../StatusSelect';
+import { Status } from '../../../services/user';
+
 import {
   CardContainer,
   CardContentContainer,
@@ -20,10 +20,10 @@ export interface CardProps {
 export const Card = (props: CardProps) => {
   const { name, status, id, onChange } = props;
   const onChangeCall = useCallback(
-    (event: any) => {
-      onChange(id, event.target.value);
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(id, event.target.value as Status);
     },
-    [id, status, onChange],
+    [id, onChange],
   );
   return (
     <CardContainer>
@@ -32,12 +32,12 @@ export const Card = (props: CardProps) => {
           <Avatar
             style={{ width: 100, height: 100 }}
             alt={name}
-            src="https://lh3.googleusercontent.com/proxy/mFNMloeWYg6QkZhpZE4hW-gGALbZ6cPzVlYIXhKPTMDXxSoatprQe1B1TICix1DMWoZFP_bemwshY9AuddXReTB4T6KLkyHa-ChlSoUc2N6p2Oe4Jd2OgA"
+            src="https://static.toiimg.com/photo/76729750.cms"
           />
         </AvatarContainer>
         <CardInfoContainer>
           <Typography variant="inherit">{name}</Typography>
-          <SelectContainer value={status} onChange={onChangeCall} />
+          <SelectContainer name={`cardSelect${id}`} value={status} onChange={onChangeCall} />
         </CardInfoContainer>
       </CardContentContainer>
     </CardContainer>

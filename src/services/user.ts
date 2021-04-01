@@ -29,21 +29,24 @@ const addUser = (name: string, status: Status) => {
     name,
   });
 };
-const filter = (filter: any, users?: User[]) =>
-  filter
-    ? users?.filter((user) => {
-        if (filter.searchStatus && user.status !== filter.searchStatus) {
-          return false;
-        }
-        if (
-          filter.searchValue &&
-          user.username.toLowerCase().indexOf(filter.searchValue.toLowerCase()) === -1
-        ) {
-          return false;
-        }
-        return true;
-      })
-    : users;
+const filter = (filter: any, users?: User[]) => {
+  if (filter) {
+    return users?.filter((user) => {
+      if (filter.searchStatus && user.status !== filter.searchStatus) {
+        return false;
+      }
+      if (
+        filter.searchValue &&
+        user.username.toLowerCase().indexOf(filter.searchValue.toLowerCase()) === -1
+      ) {
+        return false;
+      }
+      return true;
+    });
+  }
+  return users;
+};
+
 export const userService = {
   getAll,
   updateStatus,

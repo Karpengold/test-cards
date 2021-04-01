@@ -1,5 +1,5 @@
 import { userConstants } from '../constants/user';
-import { Status, Statuses, User } from '../services/user';
+import { Status, User } from '../services/user';
 
 export interface State {
   users?: User[];
@@ -24,15 +24,19 @@ export const userReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case userConstants.GETALL_REQUEST:
       return {
+        ...state,
         loading: true,
       };
     case userConstants.GETALL_SUCCESS:
       return {
+        ...state,
         users: action.users,
+        loading: false,
       };
     case userConstants.GETALL_FAILURE:
       return {
         error: action.error,
+        loading: false,
       };
 
     case userConstants.UPDATE_REQUEST:
@@ -42,7 +46,7 @@ export const userReducer = (state = initialState, action: any) => {
     case userConstants.UPDATE_SUCCESS:
       return {
         ...state,
-        users: state.users?.map((user: any) => {
+        users: state.users?.map((user: User) => {
           if (user.id === action.id) {
             user.status = action.status;
           }
@@ -51,6 +55,7 @@ export const userReducer = (state = initialState, action: any) => {
       };
     case userConstants.UPDATE_FAILURE:
       return {
+        ...state,
         error: action.error,
       };
 
@@ -75,11 +80,13 @@ export const userReducer = (state = initialState, action: any) => {
       return {
         ...state,
         users,
+        loading: false,
       };
     case userConstants.ADD_FAILURE:
       return {
         ...state,
         error: action.error,
+        loading: false,
       };
 
     default:
